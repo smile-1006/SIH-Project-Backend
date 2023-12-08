@@ -25,7 +25,10 @@ const userSchema = mongoose.Schema(
             type : String,
             enum : ["Admin", "Student", "Faculty", "Aicte-Member"],
             required : true
-        }
+        },
+        token: {
+			type: String,
+		}
     }
 );
 
