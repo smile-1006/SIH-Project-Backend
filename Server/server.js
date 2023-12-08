@@ -11,8 +11,14 @@ const cookieParser = require("cookie-parser");
 const database = require("./config/database");
 database.connect();
 
+const userRoutes = require("./routes/User");
+
 app.use(express.json());
 app.use(cookieParser());
+
+
+//routes
+app.use("/api/v1/auth", userRoutes);
 
 app.get('/', (req, res) => {
     res.send("Home Page");
