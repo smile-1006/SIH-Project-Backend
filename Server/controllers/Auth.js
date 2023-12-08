@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-// const OTP = require("../models") 
+const OTP = require("../models/OTP");
 const jwt = require("jsonwebtoken");
-const optGenerator = require("otp-generator");
+const otpGenerator = require("otp-generator");
 // const mailSender = require("mail")
 // const { passwordUpdated } = require("../")
 require("dotenv").config();
@@ -52,23 +52,22 @@ exports.signup = async (req, res) => {
             });
 
             return res.status(200).json({
-                success : true,
-                user,
+                "success" : true,
                 message : "User Registered Successfully"
             });
     }
     catch(error){
         console.log(error);
         return res.status(500).json({
-            success : false,
+            "success" : false,
             message : "Please try again!"
         })
     }
 }
 
 
-exports.login = async ()=>{
-
+exports.login = async(req, res) => {
+    
 }
 
 
