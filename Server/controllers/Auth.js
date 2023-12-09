@@ -221,11 +221,11 @@ exports.changePassword = async (req, res) => {
 
     }   
     catch(err){ 
-        console.log("Error occurred while updating password:", error);
+        console.log("Error occurred while updating password:", err);
         return res.status(500).json({
           success : false,
           message : "Error occurred while updating password",
-          error : error.message
+          error : err.message
         })
     }
 };
