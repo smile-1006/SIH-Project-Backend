@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { login, signup, sendotp, changePassword } = require("../controllers/Auth");
+const app = require("../middleware/app");
 
 
 
@@ -9,9 +10,9 @@ const { login, signup, sendotp, changePassword } = require("../controllers/Auth"
 
 
 
-router.post("/login", login);
-router.post("/signup", signup);
-router.post("/sendotp", sendotp);
+router.post("/login",app, login);
+router.post("/signup",app, signup);
+router.post("/sendotp",app, sendotp);
 // router.post("/changepassword", auth, changePassword);
 
 module.exports = router;
