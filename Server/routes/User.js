@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { auth } = require("../middlewares/auth");
 const { login, signup, sendotp, changePassword } = require("../controllers/Auth");
-
+// const {  }
 
 
 router.post("/login", login);

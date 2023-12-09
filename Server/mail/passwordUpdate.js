@@ -1,6 +1,6 @@
-const otpTemplate = (otp) => {
+exports.passwordUpdated = (email, name) => {
 	return `<!DOCTYPE html>
-	<html>
+    <html>
     
     <head>
         <meta charset="UTF-8">
@@ -55,8 +55,7 @@ const otpTemplate = (otp) => {
     
     <body>
         <div class="container">
-            <img class="logo"
-            <a href="https://res.cloudinary.com/dq11p7tgo/image/upload/v1702163486/galaxy/jzamwllountfnk3xxh8e.png"><img src="https://res.cloudinary.com/dq11p7tgo/image/upload/v1702163486/galaxy/jzamwllountfnk3xxh8e.png" alt="Aicte Logo" border="0"></a>
+        <a href="https://res.cloudinary.com/dq11p7tgo/image/upload/v1702163486/galaxy/jzamwllountfnk3xxh8e.png"><img src="https://res.cloudinary.com/dq11p7tgo/image/upload/v1702163486/galaxy/jzamwllountfnk3xxh8e.png" alt="Aicte Logo" border="0"></a>
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>Hey ${name},</p>
@@ -73,4 +72,3 @@ const otpTemplate = (otp) => {
     
     </html>`;
 };
-module.exports = otpTemplate;
