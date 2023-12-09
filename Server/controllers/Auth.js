@@ -51,7 +51,7 @@ exports.signup = async (req, res) => {
     });
 
     const token = jwt.sign({email : user.email, id : user._id, accountType : user.accountType}, process.env.JWT_SECRET, { expiresIn : "24h" });
-    res.status(200).json({user, token});
+    // res.status(200).json({user, token});
 
     return res.status(200).json({
       success: true,
