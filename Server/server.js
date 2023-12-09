@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 // // middlewares
 app.use((req,res,next)=>{
-    console.log("http method-"+req.method+",URL"+ req.url);
+    console.log("http method->"+req.method+",URL->"+ req.url);
     next();
 })
 
