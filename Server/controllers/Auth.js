@@ -4,7 +4,7 @@ const OTP = require("../models/OTP");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
 const mailSender = require("../utils/mailSender");
-// const { passwordUpdated } = require("../")
+const { passwordUpdated } = require("../mail/passwordUpdate");
 require("dotenv").config();
 
 exports.signup = async (req, res) => {
@@ -202,8 +202,12 @@ exports.changePassword = async (req, res) => {
         const updatedUserDetails = await User.findByIdAndUpdate(req.user.id, { password : encryptedPassword }, { new : true });
 
         try{
-              const emailResponse = await mailSender(updatedUserDetails.email, passwordUpdated(updatedUserDetails.email, `Password Updated`, `Dear ${updatedUserDetails.firstName} ${updatedUserDetails.lastName},
-                                                                                                                                          Your password has been updated successfully`));
+          const emailResponse = await mailSender(
+            updatedUserDetails.email, `Password Updated Successfully`, 
+            passwordUpdated(
+              updatedUserDetails.email, `${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+            )
+          );
 
               console.log("Email sent successfully:", emailResponse.response);
         }
@@ -224,11 +228,11 @@ exports.changePassword = async (req, res) => {
 
     }   
     catch(err){ 
-        console.log("Error occurred while updating password:", error);
+        console.log("Error occurred while updating password:", err);
         return res.status(500).json({
           success : false,
           message : "Error occurred while updating password",
-          error : error.message
+          error : err.message
         })
     }
 };
