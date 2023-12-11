@@ -12,6 +12,7 @@ const database = require("./config/database");
 database.connect();
 
 const userRoutes = require("./routes/User");
+const instituteRoutes = require("./routes/Institute");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,6 +25,7 @@ app.use((req,res,next)=>{
 
 // routes
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/institute", instituteRoutes);
 
 app.get('/', (req, res) => {
     res.send("Home Page");

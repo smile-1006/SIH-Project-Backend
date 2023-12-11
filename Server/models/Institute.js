@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const instituteSchema = mongoose.Schema({
-    aicteID : {
+    aicte_id : {
         type : String,
         required : true,
         trim : true,
@@ -21,7 +21,7 @@ const instituteSchema = mongoose.Schema({
         required : true,
         trim : true
     },
-    institutionType : {
+    institution_type : {
         type : String,
         enum : ["Goverment", "Govt aided", "Private-Self Financing", "State Goverment", "State Private University", "State Government University", "Deemed to be University(Pvt)"],
         required : true
@@ -32,3 +32,8 @@ const instituteSchema = mongoose.Schema({
         required : true
     }
 })
+
+
+const Institute = mongoose.model("Institute", instituteSchema);
+
+module.exports = Institute;
