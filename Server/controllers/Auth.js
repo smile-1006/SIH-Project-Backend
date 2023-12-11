@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
 const mailSender = require("../utils/mailSender");
 const { passwordUpdated } = require("../mail/passwordUpdate");
+const { successfullyRegistered } = require("../mail/successfullyRegistration");
 require("dotenv").config();
 
 exports.signup = async (req, res) => {
@@ -25,7 +26,7 @@ exports.signup = async (req, res) => {
       });
     }
 
-    // const response = await Option.find({ email }).sort({ created : -1 }).limit(1);
+    // const response = await OTP.find({ email }).sort({ created : -1 }).limit(1);
     // console.log(response);
     // if(response.length == 0)
     // {
@@ -50,10 +51,24 @@ exports.signup = async (req, res) => {
       accountType,
     });
 
+    try{
+      const emailResponse = await mailSender(
+        user.email, `Welcome to Aicte!`, 
+        successfullyRegistered(`${user.firstName} ${user.lastName}`, `${user.accountType}`)
+      );
+
+    }catch(err){
+        res.status(200).json({
+        success: true,
+        message: "User Registered Successfully",
+      });
+    }
+  
     return res.status(200).json({
       success: true,
       message: "User Registered Successfully",
     });
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({
