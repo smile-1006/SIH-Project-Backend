@@ -26,20 +26,20 @@ exports.signup = async (req, res) => {
       });
     }
 
-    const response = await OTP.find({ email }).sort({ created : -1 }).limit(1);
-      console.log(response);
-      if(response.length == 0)
-      {
-          return res.status(400).json({
-              success : false,
-              message : "Invalid OTP"
-          });
-      }else if(otp !== response[0].otp) {
-          return res.status(400).json({
-              success : false,
-              message : "Invalid OTP"
-          });
-      }
+    // const response = await OTP.find({ email }).sort({ created : -1 }).limit(1);
+    //   console.log(response);
+    //   if(response.length == 0)
+    //   {
+    //       return res.status(400).json({
+    //           success : false,
+    //           message : "Invalid OTP"
+    //       });
+    //   }else if(otp !== response[0].otp) {
+    //       return res.status(400).json({
+    //           success : false,
+    //           message : "Invalid OTP"
+    //       });
+    //   }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
