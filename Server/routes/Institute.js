@@ -13,7 +13,7 @@ router.get("/findInstituteByAicteID/:aicte_id", findInstituteByAicteID);
 
 
 
-//routes for Admin
+//routes for Institute Admin
 router.post("/addInstitute", auth, isAdmin, addInstitute);
 
 
