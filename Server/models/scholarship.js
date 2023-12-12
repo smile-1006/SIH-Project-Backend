@@ -22,6 +22,12 @@ const scholarship_schema = mongoose.Schema({
         required : true
     
     },
+    amount_released : {
+        type : Number,
+        required : true
+    
+    },
+    
 })
 
 
