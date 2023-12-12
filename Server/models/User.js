@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { resetPasswordToken } = require("../controllers/ResetPassword");
 
 const userSchema = mongoose.Schema(
     {
@@ -28,7 +29,10 @@ const userSchema = mongoose.Schema(
         },
         token: {
 			type: String,
-		}
+		},
+        resetPasswordToken : {
+            type: Date,
+        }
     }
 );
 
