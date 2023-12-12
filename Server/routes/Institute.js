@@ -6,8 +6,7 @@ const { auth, isAdmin, isFaculty, isAicteMember, isStudent, isInstitute } = requ
 
 
 
-
-//Routes for All type of users
+//routes for Institute_Admin
 router.get("/getAllInstitutes", auth, getAllInstitute);
 router.get("/findInstituteByAicteID/:aicte_id", findInstituteByAicteID);
 
