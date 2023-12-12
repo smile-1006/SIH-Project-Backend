@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 exports.getAllInstitute = async(req, res) => {
     try{
-            const allInstitute = await Institute.find({});
+            const allInstitute = await Institute.find({}, {aicte_id : true, name : true, address : true, address : true, institution_type : true, state : true});
             const totalInstituteRegistered = allInstitute.length;
 
             return res.status(200).json({
@@ -68,4 +68,40 @@ exports.addInstitute = async(req, res) => {
             message : "Internal Server Error"
         })
     }   
+}
+
+
+
+exports.findInstituteByAicteID = async(req, res) => {
+    try{
+        const { aicte_id } = req.params;
+
+        console.log("here is your id", aicte_id);
+
+        console.log(`Searching for institute with AICTE ID: ${aicte_id}`);
+
+        const institute = await Institute.findOne({ aicte_id: aicte_id });
+
+        if(!institute){
+            console.log(`No institute found with AICTE ID: ${aicte_id}`);
+            return res.status(404).json({
+                success : false,
+                message : "Institute with this AICTE ID not found!"
+            })
+        }
+        console.log(`Found institute: ${JSON.stringify(institute)}`);
+        return res.status(200).json({
+            success : true,
+            message : "Institute found",
+            data : institute
+        })
+        
+    }
+    catch(err){
+        console.log(`Error occurred: ${err.message}`);
+        return res.status(500).json({
+            success : false,
+            message : "Internal Server Error, please try after some time!"
+        })
+    }
 }
