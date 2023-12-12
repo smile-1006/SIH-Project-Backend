@@ -6,7 +6,7 @@ const { auth, isAdmin, isFaculty, isAicteMember, isStudent, isInstitute } = requ
 
 
 
-//routes for Admin
+//routes for Institute_Admin
 router.get("/getAllInstitutes", auth, getAllInstitute);
 router.post("/addInstitute", auth, isAdmin, addInstitute);
 
