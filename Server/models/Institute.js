@@ -23,7 +23,7 @@ const instituteSchema = mongoose.Schema({
     },
     institution_type : {
         type : String,
-        enum : ["Government", "Govt aided", "Private-Self Financing", "State Goverment", "State Private University", "State Government University", "Deemed to be University(Pvt)"],
+        enum : ["Government", "Govt aided", "Private-Self Financing", "State Government", "State Private University", "State Government University", "Deemed to be University(Pvt)"],
         required : true
     },
     state : {
