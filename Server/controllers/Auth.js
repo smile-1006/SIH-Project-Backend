@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Profile = require("../models/Profile");
 const OTP = require("../models/OTP");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
@@ -7,6 +8,7 @@ const mailSender = require("../utils/mailSender");
 const { passwordUpdated } = require("../mail/passwordUpdate");
 const { successfullyRegistered } = require("../mail/successfullyRegistration");
 require("dotenv").config();
+
 
 exports.signup = async (req, res) => {
   try {
