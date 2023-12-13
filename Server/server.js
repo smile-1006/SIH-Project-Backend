@@ -9,13 +9,27 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const cookieParser = require("cookie-parser");
 const database = require("./config/database");
+const { cloudinaryConnect } = require("./config/cloudinary");
 database.connect();
 
+
 const userRoutes = require("./routes/User");
+const profileRoutes = require("./routes/Profile");
 const instituteRoutes = require("./routes/Institute");
 
 app.use(express.json());
+const fileUpload = require("express-fileupload");
 app.use(cookieParser());
+
+
+app.use(
+	fileUpload({
+		useTempFiles:true,
+		tempFileDir:"/tmp",
+	})
+)
+cloudinaryConnect();
+
 
 // // middlewares
 app.use((req,res,next)=>{
@@ -26,6 +40,7 @@ app.use((req,res,next)=>{
 // routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/institute", instituteRoutes);
+app.use("/api/v1/profile", profileRoutes);
 
 app.get('/', (req, res) => {
     res.send("Home Page");
