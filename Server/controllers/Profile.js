@@ -1,8 +1,6 @@
-const { successfullyRegistered } = require("../mail/successfullyRegistration");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
-
 
 exports.updateProfile = async(req, res) => {
     try{
@@ -80,16 +78,39 @@ exports.getAllUserDetails = async (req, res) => {
 	}
 };
 
+
+function isfileTypeSupported(type, supportedTypes)
+{   
+    return supportedTypes.includes(type);
+}
+
 exports.updateDisplayPicture = async (req, res) => {
     try{
-        const displayPicture = req.files.displayPicture
+        const displayPicture = req.files.displayPicture;
         const userId = req.user.id;
-        const image  = await uploadImageToCloudinary(displayPicture, process.env.FOLDER_NAME, 1000, 1000);
-        console.log(image);
+        
+        const supportedTypes = ["jpg", "jpeg", "png"];
+        const fileType = displayPicture.name.split('.')[1].toLowerCase();
 
-        const updatedProfile = await User.findByIdAndUpdate({ _id : userId }, { iamge : image.secure_url }, { new : true });
 
-        res.status(200).json({
+        //validation
+        if(!isfileTypeSupported(fileType, supportedTypes))
+        {
+            return res.status(400).json({
+                success : false,
+                message : "File not supported"
+            })
+        }
+
+        const image = await uploadImageToCloudinary(
+            displayPicture,
+            process.env.FOLDER_NAME,
+            1000,
+            1000
+          )
+        const updatedProfile = await User.findByIdAndUpdate({ _id : userId }, { image : image.secure_url }, { new : true });
+          
+        return res.status(200).json({
             success : true,
             message : `Image Updated Successfully`,
             data : updatedProfile
