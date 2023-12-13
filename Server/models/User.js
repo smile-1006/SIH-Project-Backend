@@ -22,6 +22,15 @@ const userSchema = mongoose.Schema(
             type : String,
             required : true,
         },
+        additionalDetails: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: "Profile",
+		},
+        image : {
+            type : String,
+            required : true
+        },
         accountType : {
             type : String,
             enum : ["Admin", "Student", "Faculty", "Aicte-Member", "Institute"],
