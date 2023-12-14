@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const faculty_Schema = mongoose.Schema({
     faculty_id : {
         type : Number,
-        required : true,
-        trim : true,
+        required : true
     },
     name : {
         type : String,
@@ -13,6 +12,7 @@ const faculty_Schema = mongoose.Schema({
     },
     gender : {
         type : String,
+        enum : ['M','F'],
         required : true,
         trim : true
     },
