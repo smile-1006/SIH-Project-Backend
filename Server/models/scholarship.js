@@ -24,7 +24,7 @@ const scholarshipSchema = mongoose.Schema({
     
     },
     amount_released : {
-        type : Number,
+        type : String,
         required : true
     },
     month : {
@@ -40,6 +40,4 @@ const scholarshipSchema = mongoose.Schema({
 })
 
 
-const scholarship = mongoose.model("students_scholarships", scholarshipSchema);
-
-module.exports = scholarship;
+module.exports = mongoose.model("Scholarship", scholarshipSchema);
