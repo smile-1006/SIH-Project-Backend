@@ -17,10 +17,6 @@ router.post("/addInstitute", auth, isAdmin, addInstitute);
 
 
 
-
-
-
-
 module.exports = router;
 
 
