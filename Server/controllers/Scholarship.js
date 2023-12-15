@@ -51,23 +51,38 @@ exports.addOrUpdateScholarship = async(req, res) => {
 }
 
 
-exports.getAllScholarships = async(req, res) => {
-    try{
-        const allScholarships = await Scholarship.find({});
-        const totalScholarshipsDistributed = allScholarships.length;
+const ITEMS_PER_PAGE = 20; // Set the number of items to fetch per page
 
-            return res.status(200).json({
-                success : true,
-                "Total Scholarships Distributed" : totalScholarshipsDistributed,
-                data : allScholarships
-            })
-    }
-    catch(error){
-        console.log(error);
-		return res.status(404).json({
-			success: false,
-			message: `Can't Fetch Scholarship Data`,
-			error: error.message,
-		});
-    }
-}
+exports.getAllScholarships = async (req, res) => {
+    try {
+        let { page = 1 } = req.query; // Default to page 1 if not provided
+
+        const totalCount = await Scholarship.countDocuments();
+        const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+
+        if (page < 1 || page > totalPages) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid page number",
+            });
+        }
+
+        const skip = (page - 1) * ITEMS_PER_PAGE;
+        const allScholarships = await Scholarship.find({}).skip(skip).limit(ITEMS_PER_PAGE);
+
+        return res.status(200).json({
+            success: true,
+            totalScholarshipsDistributed: totalCount,
+            totalPages,
+            currentPage: page,
+            data: allScholarships,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Couldn't fetch scholarship data",
+            error: error.message,
+        });
+    }
+};
