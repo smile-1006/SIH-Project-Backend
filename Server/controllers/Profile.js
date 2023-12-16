@@ -4,15 +4,17 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 exports.updateProfile = async(req, res) => {
     try{
-        const { dateOfBirth = "", about = "", contactNumber = "" } = req.body;
+        const { gender="", dateOfBirth = "", about = "", contactNumber} = req.body;
         const id = req.user.id;
 
-        const userDetails = await User.findOne(id);
+        const userDetails = await User.findOne({ _id: id });
+        console.log(typeof userDetails);
         const profile = await Profile.findById(userDetails.additionalDetails);
 
+        profile.gender = gender;
         profile.dateOfBirth = dateOfBirth;
-        profile.about = about;
-        profile.contactNumber = contactNumber;
+		profile.about = about;
+		profile.contactNumber = contactNumber;
 
         await profile.save();
 
@@ -23,6 +25,7 @@ exports.updateProfile = async(req, res) => {
         });
     }   
     catch(error){
+
         console.log(error);
         return res.status(500).json({
             success : false,
@@ -32,30 +35,36 @@ exports.updateProfile = async(req, res) => {
 }
 
 exports.deleteAccount = async (req, res) => {
-    try{
-        
-        const id = req.user.id;
-        const user = await User.findById({ _id : id });
-        if(!user) {
-            return res.status(404).json({
-                success : false,
-                message : "User not found"
-            })
-        }
-        
-        await Profile.findByIdAndDelete({ _id : id });
-        res.status(200).json({
-            success : true,
-            message : "User deleted Successfully"
-        });
-    }
-    catch(error){
-        console.log(error);
-        res.status(500).json({
-            success : false,
-            message : "User Cannot be deleted Successfully"
-        });
-    }
+    try {
+		// TODO: Find More on Job Schedule
+		// const job = schedule.scheduleJob("10 * * * * *", function () {
+		// 	console.log("The answer to life, the universe, and everything!");
+		// });
+		// console.log(job);
+		console.log("Printing ID: ", req.user.id);
+		const id = req.user.id;
+		
+		const user = await User.findById({ _id: id });
+		if (!user) {
+			return res.status(404).json({
+				success: false,
+				message: "User not found",
+			});
+		}
+		// Delete Assosiated Profile with the User
+		await Profile.findByIdAndDelete({ _id: user.additionalDetails });
+		
+		await User.findByIdAndDelete({ _id: id });
+		res.status(200).json({
+			success: true,
+			message: "User deleted successfully",
+		});
+	} catch (error) {
+		console.log(error);
+		res
+			.status(500)
+			.json({ success: false, message: "User Cannot be deleted" });
+	}
 }
 
 exports.getAllUserDetails = async (req, res) => {
