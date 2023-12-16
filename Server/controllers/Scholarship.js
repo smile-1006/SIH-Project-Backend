@@ -1,4 +1,4 @@
-const Scholarship = require("../models/Scholarship");
+const Scholarship = require("../modles/scholarship");
 
 
 exports.addOrUpdateScholarship = async(req, res) => {
