@@ -15,6 +15,7 @@
   "author": "Anurag, Swapnil",
   "license": "ISC",
   "dependencies": {
+    "@elastic/elasticsearch": "^8.11.0",
     "@prisma/client": "^5.7.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",

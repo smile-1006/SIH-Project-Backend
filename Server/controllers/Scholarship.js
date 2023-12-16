@@ -51,7 +51,7 @@ exports.addOrUpdateScholarship = async(req, res) => {
 }
 
 
-const ITEMS_PER_PAGE = 20; // Set the number of items to fetch per page
+const ITEMS_PER_PAGE = 30000; // Set the number of items to fetch per page
 
 exports.getAllScholarships = async (req, res) => {
     try {
