@@ -49,7 +49,7 @@ exports.getAllInstitute = async(req, res) => {
 
             const skip = (page - 1) * ITEMS_PER_PAGE;
 
-            const allInstitute = await Institute.find({}, {aicte_id : true, name : true, address : true, address : true, institution_type : true, state : true}).skip(skip).limit(ITEMS_PER_PAGE);
+            const allInstitute = await Institute.find({}, {aicte_id : true, name : true , address : true, address : true, institution_type : true, state : true}).skip(skip).limit(ITEMS_PER_PAGE);
             //const totalInstituteRegistered = allInstitute.length;
 
             return res.status(200).json({
