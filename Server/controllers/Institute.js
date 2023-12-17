@@ -1,14 +1,33 @@
 const Institute = require("../models/Institute");
 const User = require("../models/User");
 
+const ITEMS_PER_PAGE = 1000;
+
 exports.getAllInstitute = async(req, res) => {
     try{
-            const allInstitute = await Institute.find({}, {aicte_id : true, name : true, address : true, address : true, institution_type : true, state : true});
-            const totalInstituteRegistered = allInstitute.length;
+            let { page = 1 } = req.query; // Default to page 1 if not provided  
+
+            const totalCount = await Institute.countDocuments();
+            const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+
+            if (page < 1 || page > totalPages) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid page number",
+                });
+            }
+
+            const skip = (page - 1) * ITEMS_PER_PAGE;
+
+            const allInstitute = await Institute.find({}, {aicte_id : true, name : true, address : true, address : true, institution_type : true, state : true}).skip(skip).limit(ITEMS_PER_PAGE);
+            //const totalInstituteRegistered = allInstitute.length;
 
             return res.status(200).json({
                 success : true,
-                Registered_Institute : totalInstituteRegistered,
+                //Registered_Institute : totalInstituteRegistered,
+                Total_Institute : totalCount,
+                Total_Pages : totalPages,
+                Current_Page : page,
                 data : allInstitute
             })
     }
