@@ -6,6 +6,36 @@ const ITEMS_PER_PAGE = 1000;
 exports.getAllInstitute = async(req, res) => {
     try{
             let { page = 1 } = req.query; // Default to page 1 if not provided  
+            const search = req.query.search || "";
+            let sort = req.query.sort || "state";
+            let sector = req.query.sector || "All";
+            console.log(sector)
+            const SectorOption =  [
+                "Government", 
+                "Govt aided", 
+                "Private-Self Financing", 
+                "State Government", 
+                "State Private University", 
+                "State Government University", 
+                "Deemed to be University(Pvt)"
+            ];  
+            console.log(SectorOption);
+
+            if (typeof req.query.sector === 'string') {
+                sector = req.query.sector.split(",");
+            } else {
+                sector = [...SectorOption];
+            }
+            req.query.sort?(sort = req.query.sort.split(",")):(sort = [sort]);
+                
+            let sortBy = {};
+            
+            if (sort[0] === "state") {
+                sortBy = { state: 1 };
+            } else if (sort[0] === "aitce_id") {
+                sortBy = { aicte_id: 1 };
+            } 
+            console.log(sortBy);
 
             const totalCount = await Institute.countDocuments();
             const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
