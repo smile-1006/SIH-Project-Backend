@@ -105,3 +105,37 @@ exports.findInstituteByAicteID = async(req, res) => {
         })
     }
 }
+
+exports.findInstituteByname = async(req, res) => {
+    try{
+        const { name } = req.params;
+
+        console.log("here is your name", name);
+
+        console.log(`Searching for institute with NAME: ${name}`);
+
+        const institute = await Institute.findOne({ name: name });
+
+        if(!institute){
+            console.log(`No institute found with AICTE ID: ${ name}`);
+            return res.status(404).json({
+                success : false,
+                message : "Institute with this NAME not found!"
+            })
+        }
+        console.log(`Found institute: ${JSON.stringify(institute)}`);
+        return res.status(200).json({
+            success : true,
+            message : "Institute found",
+            data : institute
+        })
+        
+    }
+    catch(err){
+        console.log(`Error occurred: ${err.message}`);
+        return res.status(500).json({
+            success : false,
+            message : "Internal Server Error, please try after some time!"
+        })
+    }
+}
