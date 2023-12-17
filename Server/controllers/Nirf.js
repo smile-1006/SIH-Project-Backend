@@ -1,4 +1,3 @@
-const Institute = require("../models/Institute");
 const Nirf = require("../models/Nirf");
 
 exports.addNirf = async(req, res) => {
@@ -13,6 +12,8 @@ exports.addNirf = async(req, res) => {
             })
         }
 
+        let lower_case_institute = institute_name.toLowerCase();
+
         const existingInstitute = await Nirf.findOne({ $or: [{ institute_name: institute_name }, { institute_id: institute_id }] });
         if(existingInstitute){
             return res.status(400).json({
@@ -21,7 +22,7 @@ exports.addNirf = async(req, res) => {
             })
         }
 
-        await Nirf.create({ranking_year, ranking_category, institute_id, institute_name, city, state, score, rank, sector});
+        await Nirf.create({ranking_year, ranking_category, institute_id, institute_name : lower_case_institute, city, state, score, rank, sector});
 
         return res.status(200).json({
             success : true,
