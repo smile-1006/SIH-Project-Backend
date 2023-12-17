@@ -8,6 +8,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const database = require("./config/database");
 const { cloudinaryConnect } = require("./config/cloudinary");
 database.connect();
@@ -22,6 +23,12 @@ app.use(express.json());
 const fileUpload = require("express-fileupload");
 app.use(cookieParser());
 
+app.use(
+    cors({
+        origin : "http://localhost:3000",
+        credentials : true,
+    })
+)
 
 app.use(
 	fileUpload({
