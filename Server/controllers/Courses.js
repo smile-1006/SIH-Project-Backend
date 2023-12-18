@@ -44,7 +44,7 @@ exports.create_course = async(req, res) => {
     }
 }
 
-const ITEMS_PER_PAGE = 10;
+
 exports.getAllCourses = async(req, res) => {
     try{
             let { page = 1 } = req.query; // Default to page 1 if not provided  
