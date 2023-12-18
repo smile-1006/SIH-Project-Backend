@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
+const HOST = process.env.HOST || '0.0.0.0';
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const database = require("./config/database");
@@ -53,7 +54,7 @@ app.use("/api/v1/institute", instituteRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/scholarship", scholarshipRoutes);
 app.use("/api/v1/nirf-ranking", nirfRoutes)
-app.use("/api/v1/course", courseRoutes)
+app.use("api/v1/course")
 
 app.get('/', (req, res) => {
     res.send("Home Page");
