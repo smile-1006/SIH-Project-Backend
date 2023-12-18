@@ -54,7 +54,7 @@ app.use("/api/v1/institute", instituteRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/scholarship", scholarshipRoutes);
 app.use("/api/v1/nirf-ranking", nirfRoutes)
-app.use("api/v1/course")
+app.use("/api/v1/course", courseRoutes);
 
 app.get('/', (req, res) => {
     res.send("Home Page");
