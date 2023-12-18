@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
+const HOST = process.env.HOST || '0.0.0.0';
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const database = require("./config/database");
