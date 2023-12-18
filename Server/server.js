@@ -19,6 +19,7 @@ const profileRoutes = require("./routes/Profile");
 const instituteRoutes = require("./routes/Institute");
 const scholarshipRoutes = require("./routes/Scholarship");
 const nirfRoutes = require("./routes/Nirf");
+const courseRoutes = require("./routes/Course");
 
 app.use(express.json());
 const fileUpload = require("express-fileupload");
@@ -52,7 +53,7 @@ app.use("/api/v1/institute", instituteRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/scholarship", scholarshipRoutes);
 app.use("/api/v1/nirf-ranking", nirfRoutes)
-app.use("api/v1/course")
+app.use("api/v1/course", courseRoutes);
 
 app.get('/', (req, res) => {
     res.send("Home Page");
