@@ -1,5 +1,6 @@
 const Course = require("../models/Course");
 
+const ITEMS_PER_PAGE = 10;
 
 exports.create_course = async(req, res) => {
     try{
