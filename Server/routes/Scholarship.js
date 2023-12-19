@@ -6,7 +6,7 @@ const { addOrUpdateScholarship, getAllScholarships } = require("../controllers/S
 const { auth, isAdmin } = require("../middlewares/auth");
 
 // for Admin Only
-router.post("/addOrUpdateScholarship", auth, isAdmin, addOrUpdateScholarship);
+router.post("/addOrUpdateScholarship",  addOrUpdateScholarship);//auth, isAdmin,
 
 
 //for all role
