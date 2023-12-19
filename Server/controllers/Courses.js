@@ -42,9 +42,8 @@ exports.create_course = async(req, res) => {
         })
     }
 
-    
-}
-const ITEMS_PER_PAGE = 10;
+
+
 exports.getAllCourses = async(req, res) => {
     try{
             let { page = 1 } = req.query; // Default to page 1 if not provided  
@@ -52,6 +51,7 @@ exports.getAllCourses = async(req, res) => {
             let sort = req.query.sort || "duration";
             let platform = req.query.platform || "All";
             console.log(platform); // Fix variable name
+
 
             const platformOption = [
             "CEC",
@@ -111,8 +111,9 @@ exports.getAllCourses = async(req, res) => {
         console.log(error);
 		return res.status(404).json({
 			success: false,
-			message: `Can't Fetch Institute Data`,
+			message: "Can't Fetch Institute Data",
 			error: error.message,
 		});
 	}
 }
+
