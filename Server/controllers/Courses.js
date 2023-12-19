@@ -1,6 +1,5 @@
 const Course = require("../models/Course");
 
-const ITEMS_PER_PAGE = 10;
 
 exports.create_course = async(req, res) => {
     try{
@@ -42,7 +41,7 @@ exports.create_course = async(req, res) => {
             message : "Please try again"
         })
     }
-}
+
 
 
 exports.getAllCourses = async(req, res) => {
@@ -52,6 +51,7 @@ exports.getAllCourses = async(req, res) => {
             let sort = req.query.sort || "duration";
             let platform = req.query.platform || "All";
             console.log(platform); // Fix variable name
+
 
             const platformOption = [
             "CEC",
@@ -116,3 +116,4 @@ exports.getAllCourses = async(req, res) => {
 		});
 	}
 }
+

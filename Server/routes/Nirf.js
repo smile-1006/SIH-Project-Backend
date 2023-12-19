@@ -7,7 +7,7 @@ const { addNirf,getNirfList } = require("../controllers/Nirf");
 
 
 
-router.post("/add-nirf-ranking", auth, isAdmin, addNirf);
+router.post("/add-nirf-ranking",  addNirf);//auth, isAdmin,
 router.get("/get-nirf-ranking",  getNirfList);
 
 module.exports = router;

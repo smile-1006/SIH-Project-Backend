@@ -4,9 +4,9 @@ const { auth } = require("../middlewares/auth");
 
 const { deleteAccount, updateProfile, getAllUserDetails, updateDisplayPicture } = require("../controllers/Profile");
 
-router.delete("/deleteProfile", auth, deleteAccount);
-router.put("/updateProfile", auth, updateProfile);
-router.put("/updateProfilePicture", auth, updateDisplayPicture);
-router.get("/getUserDetails", auth, getAllUserDetails);
+router.delete("/deleteProfile", deleteAccount);//auth,
+router.put("/updateProfile",  updateProfile);//auth,
+router.put("/updateProfilePicture",  updateDisplayPicture);//  auth,
+router.get("/getUserDetails",  getAllUserDetails);//auth,
 
 module.exports = router;
