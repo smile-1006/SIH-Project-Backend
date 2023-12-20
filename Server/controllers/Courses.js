@@ -41,7 +41,7 @@ exports.create_course = async(req, res) => {
             message : "Please try again"
         })
     }
-
+}
 
 
 exports.getAllCourses = async(req, res) => {
